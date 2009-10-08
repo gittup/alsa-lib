@@ -1,0 +1,8 @@
+CFLAGS += -Wall
+CFLAGS += -W
+CFLAGS += -I$(TUP_CWD)/include
+
+# For things that include <alsa/foo.h>, this dir has a symlink for 'alsa'
+CFLAGS += -I$(TUP_CWD)
+
+generated_headers += $(TUP_CWD)/include/asoundlib.h

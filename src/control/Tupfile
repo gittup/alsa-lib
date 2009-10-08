@@ -1,0 +1,16 @@
+ifeq (@(SND),y)
+include_rules
+
+srcs += cards.c
+srcs += control.c
+srcs += control_ext.c
+srcs += control_hw.c
+srcs += control_shm.c
+srcs += control_symbols.c
+srcs += hcontrol.c
+srcs += namehint.c
+srcs += setup.c
+srcs += tlv.c
+
+: foreach $(srcs) | $(generated_headers) |> !cc |> %B.o
+endif

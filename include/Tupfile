@@ -1,0 +1,17 @@
+ifeq (@(SND),y)
+.gitignore
+
+extra-@(SND_PCM) += alsa/pcm.h
+extra-@(SND_RAWMIDI) += alsa/rawmidi.h
+extra-@(SND_PCM) += alsa/timer.h
+extra-@(SND_HWDEP) += alsa/hwdep.h
+extra-y += alsa/control.h
+# If mixer?
+extra-y += alsa/mixer.h
+extra-@(SND_SEQUENCER) += alsa/seq_event.h
+extra-@(SND_SEQUENCER) += alsa/seq.h
+extra-@(SND_SEQUENCER) += alsa/seqmid.h
+extra-@(SND_SEQUENCER) += alsa/seq_midi_event.h
+
+: asoundlib-head.h asoundlib-tail.h |> ^ GEN %o^ rm -f %o; (cat asoundlib-head.h; for i in $(extra-y); do echo "#include <$i>"; done; cat asoundlib-tail.h) > %o |> asoundlib.h
+endif

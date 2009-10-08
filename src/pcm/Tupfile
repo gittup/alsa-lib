@@ -1,0 +1,50 @@
+ifeq (@(SND),y)
+include_rules
+
+srcs += atomic.c
+srcs += interval.c
+srcs += mask.c
+srcs += pcm.c
+srcs += pcm_adpcm.c
+srcs += pcm_alaw.c
+srcs += pcm_asym.c
+srcs += pcm_copy.c
+srcs += pcm_direct.c
+srcs += pcm_dmix.c
+srcs += pcm_dshare.c
+srcs += pcm_dsnoop.c
+srcs += pcm_empty.c
+# libdl
+#srcs += pcm_extplug.c
+srcs += pcm_file.c
+srcs += pcm_generic.c
+srcs += pcm_hooks.c
+srcs += pcm_hw.c
+srcs += pcm_iec958.c
+# libdl
+#srcs += pcm_ioplug.c
+#srcs += pcm_ladspa.c
+srcs += pcm_lfloat.c
+srcs += pcm_linear.c
+# libdl
+#srcs += pcm_meter.c
+srcs += pcm_misc.c
+srcs += pcm_mmap.c
+srcs += pcm_mmap_emul.c
+srcs += pcm_mulaw.c
+srcs += pcm_multi.c
+srcs += pcm_null.c
+srcs += pcm_params.c
+srcs += pcm_plug.c
+srcs += pcm_plugin.c
+srcs += pcm_rate.c
+srcs += pcm_rate_linear.c
+srcs += pcm_route.c
+srcs += pcm_share.c
+srcs += pcm_shm.c
+srcs += pcm_simple.c
+srcs += pcm_softvol.c
+srcs += pcm_symbols.c
+
+: foreach $(srcs) | $(generated_headers) |> !cc |> %B.o
+endif

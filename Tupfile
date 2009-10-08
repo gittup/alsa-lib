@@ -1,0 +1,12 @@
+ifeq (@(SND),y)
+include_rules
+
+obj-y += src/control/*.o
+obj-y += src/mixer/*.o
+obj-y += src/pcm/*.o
+obj-y += src/timer/*.o
+obj-y += src/*.o
+
+: $(obj-y) |> !ar |> libasound.a
+
+endif

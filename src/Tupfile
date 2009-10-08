@@ -1,0 +1,5 @@
+ifeq (@(SND),y)
+include_rules
+
+: foreach *.c | $(generated_headers) |> !cc |> %B.o
+endif
