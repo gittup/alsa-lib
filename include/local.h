@@ -197,6 +197,7 @@ extern snd_lib_error_handler_t snd_err_msg;
 # ifdef HAVE_ELF
 
 /* We want the .gnu.warning.SYMBOL section to be unallocated.  */
+#ifndef __make_section_unallocated
 #  ifdef HAVE_ASM_PREVIOUS_DIRECTIVE
 #   define __make_section_unallocated(section_string)	\
   asm (".section " section_string "\n\t.previous");
@@ -206,9 +207,11 @@ extern snd_lib_error_handler_t snd_err_msg;
 #  else
 #   define __make_section_unallocated(section_string)
 #  endif
+#endif
 
 /* Tacking on "\n\t#" to the section name makes gcc put it's bogus
    section attributes on what looks like a comment to the assembler.  */
+#ifndef link_warning
 #  ifdef HAVE_SECTION_QUOTES
 #   define link_warning(symbol, msg) \
   __make_section_unallocated (".gnu.warning." ASM_NAME(#symbol)) \
@@ -220,6 +223,7 @@ extern snd_lib_error_handler_t snd_err_msg;
   static const char __evoke_link_warning_##symbol[]	\
     __attribute__ ((section (".gnu.warning." ASM_NAME(#symbol) "\n\t#"))) = msg;
 #  endif
+#endif
 # else
 #  define link_warning(symbol, msg)		\
   asm (".stabs \"" msg "\",30,0,0,0\n\t"	\
