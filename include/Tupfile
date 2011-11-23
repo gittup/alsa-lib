@@ -13,5 +13,5 @@ extra-@(SND_SEQUENCER) += alsa/seq.h
 extra-@(SND_SEQUENCER) += alsa/seqmid.h
 extra-@(SND_SEQUENCER) += alsa/seq_midi_event.h
 
-: asoundlib-head.h asoundlib-tail.h |> ^ GEN %o^ rm -f %o; (cat asoundlib-head.h; for i in $(extra-y); do echo "#include <$i>"; done; cat asoundlib-tail.h) > %o |> asoundlib.h
+: asoundlib-head.h asoundlib-tail.h |> ^ GEN %o^ (cat asoundlib-head.h; for i in $(extra-y); do echo "#include <$i>"; done; cat asoundlib-tail.h) > %o |> asoundlib.h
 endif
